@@ -1,19 +1,21 @@
 package com.ui.demo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +27,34 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextName;
     private Button buttonSubmit;
     private RecyclerView recyclerView;
-    private MyRecyclerAdapter myRecyclerAdapter;
-    private List<UserInfo> userInfoList;
+    private FrameLayout frameFragment;
+    private ViewPager2 viewPager;
 
+
+    private MyRecyclerAdapter myRecyclerAdapter;
+    private ViewPagerAdapter viewPagerAdapter;
+
+    private List<UserInfo> userInfoList;
+    private MySqlliteOpenHelper mySqlliteOpenHelper;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
         Log.d(TAG, "onCreate: ");
-        recyclerView = findViewById(R.id.recyclerView);
+        /*recyclerView = findViewById(R.id.recyclerView);
         userInfoList = new ArrayList<>();
-        showList();
+        mySqlliteOpenHelper = new MySqlliteOpenHelper(this);*/
+       /* saveDataInDb();
+        showList();*/
+
+        /*frameFragment = findViewById(R.id.frameLayout);
+
+        FragmentOne fragmentOne = new FragmentOne();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragmentOne).commit();*/
 
         /*editTextName = findViewById(R.id.editTextName);
         buttonSubmit = findViewById(R.id.buttonSubmit);
@@ -51,6 +67,21 @@ public class MainActivity extends AppCompatActivity {
                goToInformationActivity(text);
             }
         });*/
+
+
+        viewPager = findViewById(R.id.pager);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        viewPagerAdapter = new ViewPagerAdapter(this);
+        viewPager.setAdapter(viewPagerAdapter);
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> {
+                    if (position == 1) {
+                        tab.setText("Two");
+                    } else {
+                        tab.setText("One");
+                    }
+                }
+        ).attach();
     }
 
     private void goToInformationActivity(String name) {
@@ -67,12 +98,20 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();*/
     }
 
+    private void saveDataInDb() {
+        mySqlliteOpenHelper.insertData(new UserInfo("Rajesh", "25"));
+        mySqlliteOpenHelper.insertData(new UserInfo("Matteo", "24"));
+        mySqlliteOpenHelper.insertData(new UserInfo("Max", "27"));
+        mySqlliteOpenHelper.insertData(new UserInfo("Julia", "19"));
+    }
+
 
     private void showList() {
-        userInfoList.add(new UserInfo("Rajesh", "25"));
+        /*userInfoList.add(new UserInfo("Rajesh", "25"));
         userInfoList.add(new UserInfo("Matteo", "24"));
         userInfoList.add(new UserInfo("Max", "27"));
-        userInfoList.add(new UserInfo("Julia", "19"));
+        userInfoList.add(new UserInfo("Julia", "19"));*/
+        userInfoList = mySqlliteOpenHelper.getUserInfo();
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         myRecyclerAdapter = new MyRecyclerAdapter(this, userInfoList);
         recyclerView.setAdapter(myRecyclerAdapter);
