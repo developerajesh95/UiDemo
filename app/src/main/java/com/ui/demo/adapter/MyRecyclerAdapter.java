@@ -1,4 +1,4 @@
-package com.ui.demo;
+package com.ui.demo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ui.demo.R;
+import com.ui.demo.model.UserInfo;
 
 import java.util.List;
 

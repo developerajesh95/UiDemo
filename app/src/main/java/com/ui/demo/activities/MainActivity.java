@@ -1,4 +1,4 @@
-package com.ui.demo;
+package com.ui.demo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +9,19 @@ import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.ui.demo.adapter.MyRecyclerAdapter;
+import com.ui.demo.localdb.MySharedPreferences;
+import com.ui.demo.localdb.MySqlliteOpenHelper;
+import com.ui.demo.R;
+import com.ui.demo.model.UserInfo;
+import com.ui.demo.adapter.ViewPagerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {

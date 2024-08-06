@@ -4,7 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".FragmentOne">
+    tools:context=".fragments.FragmentOne">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tvFragmentOne"
@@ -15,6 +22,7 @@
         android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
+        android:visibility="gone"
         android:gravity="center"/>
 
 </FrameLayout>

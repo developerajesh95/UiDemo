@@ -1,14 +1,13 @@
-package com.ui.demo;
+package com.ui.demo.activities;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.ui.demo.localdb.MySharedPreferences;
+import com.ui.demo.R;
 
 public class InformationActivity extends AppCompatActivity {
 

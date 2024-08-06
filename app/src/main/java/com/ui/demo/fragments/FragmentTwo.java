@@ -1,15 +1,28 @@
-package com.ui.demo;
+package com.ui.demo.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ui.demo.R;
+import com.ui.demo.interfaces.UserService;
+import com.ui.demo.model.User;
+import com.ui.demo.utils.RetrofitInstances;
+
+import java.util.List;
+
+import retrofit2.Call;
+
 public class FragmentTwo extends Fragment {
+
 
     private TextView tvFragmentTwo;
 
@@ -26,6 +39,12 @@ public class FragmentTwo extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        makeARequest();
+    }
+
     private void initViews(View view) {
         tvFragmentTwo = view.findViewById(R.id.tvFragmentTwo);
         tvFragmentTwo.setOnClickListener(v -> {
@@ -33,5 +52,12 @@ public class FragmentTwo extends Fragment {
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
+    }
+
+    private void makeARequest() {
+        UserService userService = RetrofitInstances.getInstance().create(UserService.class);
+        Call<List<User>> users = userService.getUsers();
+        Log.d("FragmentTwo", "makeARequest: "+users.request().body());
+
     }
 }

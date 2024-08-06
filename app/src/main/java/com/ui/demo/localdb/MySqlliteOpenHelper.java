@@ -1,4 +1,4 @@
-package com.ui.demo;
+package com.ui.demo.localdb;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.ui.demo.model.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;

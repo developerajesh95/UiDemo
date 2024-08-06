@@ -1,4 +1,4 @@
-package com.ui.demo;
+package com.ui.demo.model;
 
 public class UserInfo {
 

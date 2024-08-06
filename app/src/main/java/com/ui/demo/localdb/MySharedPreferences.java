@@ -1,4 +1,4 @@
-package com.ui.demo;
+package com.ui.demo.localdb;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
