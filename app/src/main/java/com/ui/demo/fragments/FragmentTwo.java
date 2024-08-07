@@ -20,6 +20,8 @@ import com.ui.demo.utils.RetrofitInstances;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentTwo extends Fragment {
 
@@ -57,7 +59,27 @@ public class FragmentTwo extends Fragment {
     private void makeARequest() {
         UserService userService = RetrofitInstances.getInstance().create(UserService.class);
         Call<List<User>> users = userService.getUsers();
-        Log.d("FragmentTwo", "makeARequest: "+users.request().body());
+        users.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<User> users = response.body();
+                    // Log the list of users or handle them as needed
+                    for (User user: users) {
+                        Log.d("FragmentTwo", "Users received: " + user.getName());
+                    }
+                } else {
+                    // Handle the case where the response is unsuccessful or the body is null
+                    Log.e("FragmentTwo", "Request failed with status: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
+                // Log the error or handle the failure case
+                Log.e("FragmentTwo", "Network request failed", t);
+            }
+        });
 
     }
 }

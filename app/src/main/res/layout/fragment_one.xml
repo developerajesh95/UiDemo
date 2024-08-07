@@ -25,4 +25,12 @@
         android:visibility="gone"
         android:gravity="center"/>
 
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
+
 </FrameLayout>
